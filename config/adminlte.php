@@ -781,6 +781,11 @@ return [
             'url'  => 'categories',
             'icon' => 'bi bi-boxes',
         ],
+        [
+            'text' => 'Supplier',
+            'url'  => 'suppliers',
+            'icon' => 'bi bi-truck',
+        ],
         // // Navbar items:
         // [
         //     'type' => 'navbar-search',
