@@ -1,9 +1,9 @@
 @extends('adminlte::page')
 
-@section('title', 'Manajemen Kategori Barang')
+@section('title', 'Manajemen Supplier')
 
 @section('content_header')
-    <h1><i class="fas fa-tags text-success"></i> Kategori Barang</h1>
+    <h1><i class="fas fa-tags text-success"></i>Supplier</h1>
 @stop
 
 @section('content')
@@ -51,7 +51,7 @@
                                 <a href="{{ route('suppliers.edit', $supplier->id) }}" class="btn btn-xs btn-warning mr-1">
                                     <i class="fas fa-edit"></i> Edit
                                 </a>
-                                <form action="{{ route('suppliers.destroy', $supplier->id) }}" method="POST" class="d-inline" onsubmit="return confirm('Yakin ingin menghapus kategori ini?');">
+                                <form action="{{ route('suppliers.destroy', $supplier->id) }}" method="POST" class="d-inline" onsubmit="return confirm('Yakin ingin menghapus ini?');">
                                     @csrf
                                     @method('DELETE')
                                     <button type="submit" class="btn btn-xs btn-danger rounded-0 rounded-right">

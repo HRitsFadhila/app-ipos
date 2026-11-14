@@ -779,12 +779,17 @@ return [
         [
             'text' => 'Kategori Barang',
             'url'  => 'categories',
-            'icon' => 'bi bi-boxes',
+            'icon' => 'bi bi-tags',
         ],
         [
             'text' => 'Supplier',
             'url'  => 'suppliers',
             'icon' => 'bi bi-truck',
+        ],
+        [
+            'text' => 'Produk',
+            'url'  => 'products',
+            'icon' => 'bi bi-boxes',
         ],
         // // Navbar items:
         // [
