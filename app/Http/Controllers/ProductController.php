@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class ProductController extends Controller
 {
@@ -31,38 +32,90 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        //
-    }
+        $request->validate([
+            'category_id' => 'required|exists:categories,id',
+            'name' => 'required|string|max:255',
+            'purchase_price' => 'required|numeric|min:0',
+            'selling_price' => 'required|numeric|min:0',
+            'stock' => 'required|integer|min:0',
+            'unit' => 'required|string|max:50',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,webp|max:2048',
+        ]);
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
+        $category = Category::findOrFail($request->category_id);
+        $prefix = strtoupper(substr($category->name, 0, 3));
+        $lastProduct = Product::where('category_id', $category->id)->latest('id')->first();
+        $nextNumber = $lastProduct ? $lastProduct->id + 1 : 1;
+        $autoCode = $prefix . '-' . str_pad($nextNumber, 3, '0', STR_PAD_LEFT);
+
+        $data = $request->all();
+        $data['code'] = $autoCode;
+
+        if ($request->hasFile('image')) {
+            $data['image'] = $request->file('image')->store('products', 'public');
+        }
+
+        Product::create($data);
+
+        return redirect()->route('products.index')->with('success', 'Produk berhasil ditambahkan dengan SKU: ' . $autoCode);
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Product $product)
     {
-        //
+        $categories = Category::all();
+        return view('admin.products.edit', compact('product','categories'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Product $product)
     {
-        //
+        $request->validate([
+            'category_id' => 'required|exists:categories,id',
+            'name' => 'required|string|max:255',
+            'purchase_price' => 'required|numeric|min:0',
+            'selling_price' => 'required|numeric|min:0',
+            'stock' => 'required|integer|min:0',
+            'unit' => 'required|string|max:50',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,webp|max:2048',
+        ]);
+
+        $data = $request->all();
+
+        if ($product->category_id != $request->category_id) {
+            $category = Category::findOrFail($request->category_id);
+            $prefix = strtoupper(substr($category->name, 0, 3));
+            $lastProduct = Product::where('category_id', $category->id)->latest('id')->first();
+            $nextNumber = $lastProduct ? $lastProduct->id + 1 : 1;
+            $data['code'] = $prefix . '-' . str_pad($nextNumber, 3, '0', STR_PAD_LEFT);
+        }
+
+        if ($request->hasFile('image')) {
+            if ($product->image && Storage::disk('public')->exists($product->image)) {
+                Storage::disk('public')->delete($product->image);
+            }
+            $data['image'] = $request->file('image')->store('products', 'public');
+        }
+
+        $product->update($data);
+
+        return redirect()->route('products.index')->with('success', 'Produk berhasil diperbarui!');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Product $product)
     {
-        //
+        if ($product->image && Storage::disk('public')->exists($product->image)) {
+            Storage::disk('public')->delete($product->image);
+        }
+
+        $product->delete();
+        return redirect()->route('products.index')->with('success', 'Produk berhasil dihapus!');
     }
 }

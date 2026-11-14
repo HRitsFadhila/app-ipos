@@ -791,6 +791,7 @@ return [
             'url'  => 'products',
             'icon' => 'bi bi-boxes',
         ],
+        'header' => 'TRANSAKSI',
         // // Navbar items:
         // [
         //     'type' => 'navbar-search',
