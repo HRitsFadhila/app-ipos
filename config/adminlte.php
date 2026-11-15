@@ -791,7 +791,14 @@ return [
             'url'  => 'products',
             'icon' => 'bi bi-boxes',
         ],
+        [
         'header' => 'TRANSAKSI',
+        ],
+        [
+            'text' => 'Barang Masuk',
+            'url'  => 'purchases',
+            'icon' => 'bi bi-box-arrow-in-down',
+        ],
         // // Navbar items:
         // [
         //     'type' => 'navbar-search',
