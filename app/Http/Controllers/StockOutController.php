@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Product;
 use App\Models\StockOut;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class StockOutController extends Controller
@@ -41,7 +42,7 @@ class StockOutController extends Controller
 
             StockOut::create([
                 'product_id' => $request->product_id,
-                'user_id' => 1,
+                'user_id' => Auth::id(),
                 'quantity' => $request->quantity,
                 'type' => $request->type,
                 'description' => $request->description,

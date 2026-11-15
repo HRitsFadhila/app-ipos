@@ -8,6 +8,7 @@ use App\Models\PurchaseDetail;
 use App\Models\Supplier;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 
 class PurchaseController extends Controller
 {
@@ -49,7 +50,7 @@ class PurchaseController extends Controller
             // 1. Simpan Header Purchase
             $purchase = Purchase::create([
                 'supplier_id' => $request->supplier_id,
-                'user_id' => 1,
+                'user_id' => Auth::id(),
                 'invoice_number' => $request->invoice_number,
                 'total_cost' => $totalCost,
             ]);

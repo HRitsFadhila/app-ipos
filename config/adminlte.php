@@ -198,9 +198,9 @@ return [
 
     'logout_method' => null,
     'login_url' => 'login',
-    'register_url' => 'register',
-    'password_reset_url' => 'password/reset',
-    'password_email_url' => 'password/email',
+    'register_url' => null,
+    'password_reset_url' => null,
+    'password_email_url' => null,
     'profile_url' => false,
 
     /*
@@ -803,6 +803,14 @@ return [
             'text' => 'Barang Keluar',
             'url'  => 'stock-outs',
             'icon' => 'bi bi-box-arrow-up',
+        ],
+        [
+        'header' => 'PENGATURAN',
+        ],
+        [
+            'text' => 'Manajemen User',
+            'url'  => 'users',
+            'icon' => 'bi bi-fw bi-people',
         ],
         // // Navbar items:
         // [

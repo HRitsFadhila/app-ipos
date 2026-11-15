@@ -9,10 +9,6 @@
 @section('content')
     @if(session('success'))
         <div class="alert alert-success alert-dismissible position-relative pr-5" role="alert">
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close" style="position: absolute; right: 15px; top: 12px;">
-                <span aria-hidden="true">&times;</span>
-            </button>
-            <h5><i class="icon fas fa-check"></i> Berhasil!</h5>
             {{ session('success') }}
         </div>
     @endif
