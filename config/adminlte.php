@@ -799,6 +799,11 @@ return [
             'url'  => 'purchases',
             'icon' => 'bi bi-box-arrow-in-down',
         ],
+        [
+            'text' => 'Barang Keluar',
+            'url'  => 'stock-outs',
+            'icon' => 'bi bi-box-arrow-up',
+        ],
         // // Navbar items:
         // [
         //     'type' => 'navbar-search',

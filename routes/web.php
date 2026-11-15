@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\PurchaseController;
+use App\Http\Controllers\StockOutController;
 use App\Http\Controllers\SupplierController;
 
 Route::get('/', function () {
@@ -17,3 +18,4 @@ Route::resource('categories', CategoryController::class);
 Route::resource('suppliers', SupplierController::class);
 Route::resource('products', ProductController::class);
 Route::resource('purchases', PurchaseController::class)->except(['edit', 'update', 'destroy']);
+Route::resource('stock-outs', StockOutController::class)->except(['edit', 'update', 'destroy']);

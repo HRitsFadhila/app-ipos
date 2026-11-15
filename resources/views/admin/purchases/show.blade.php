@@ -8,7 +8,6 @@
 
 @section('content')
     <div class="row">
-        {{-- Informasi Umum Transaksi & Supplier --}}
         <div class="col-md-12">
             <div class="card card-primary card-outline">
                 <div class="card-header">
@@ -40,7 +39,6 @@
             </div>
         </div>
 
-        {{-- Tabel Daftar Item Barang yang Dibeli --}}
         <div class="col-md-12">
             <div class="card card-success card-outline">
                 <div class="card-header">
